@@ -1,11 +1,81 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+ 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "postgres://default:4TczpBdx1qkW@ep-winter-bread-94566729-pooler.ap-southeast-1.postgres.vercel-storage.com:5432/verceldb" // uses connection pooling
+  directUrl = "postgres://default:4TczpBdx1qkW@ep-winter-bread-94566729.ap-southeast-1.postgres.vercel-storage.com:5432/verceldb" // uses a direct connection
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email         String  @unique
+  name        String
+  createAt    DateTime    @default(now())
+  lastSeen    DateTime    @updatedAt()
+  profile     UserProfile[]
+  account     UserAccount[]
+  records     UserRecord[]
+}
+
+model UserProfile {
+    id           String     @id @default(uuid())
+  bio     String?        
+  user    User      @relation(fields: [userId], references: [id])
+  userId  String
+}
+
+model UserSetting {
+  id           String     @id @default(uuid())
+  currencySign  String    
+  currencyPosition  CurrencyPositionOpts  @default(AtStart)
+  decimalPlaces  Int
+}
+
+enum CurrencyPositionOpts {
+  AtStart
+  AtEnd
+  DontUse
+}
+
+model UserAccount {
+  id        String     @id @default(uuid())
+  name  String  
+  saldo   Int   @default(0)
+  icon  String
+  user    User      @relation(fields: [userId], references: [id])
+  userId  String
+  records  UserRecord[]
+}
+
+model MsCategory {
+  id Int  @id @default(autoincrement())
+  icon  String
+  name String
+  records UserRecord[]
+}
+
+model UserRecord{
+  id           String     @id @default(uuid())
+  description  String?
+  value       Int
+  orderType   OrderTypeOpts
+  createAt    DateTime  @default(now())
+  updateAt    DateTime  @updatedAt()
+  account   UserAccount @relation(fields: [accountId], references: [id])
+  accountId   String
+  user    User      @relation(fields: [userId], references: [id])
+  userId  String
+  category MsCategory  @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+}
+ 
+enum OrderTypeOpts {
+  EXPENSE
+  INCOME
+  TRANSFER
 }

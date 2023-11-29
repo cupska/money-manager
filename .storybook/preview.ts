@@ -1,4 +1,7 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react"
+// .storybook/preview.js
+import "../app/globals.css"
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport"
 
 const preview: Preview = {
   parameters: {
@@ -9,7 +12,10 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+    },
   },
-};
+}
 
-export default preview;
+export default preview
