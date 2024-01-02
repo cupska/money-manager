@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  #calcNum [value="="] {
+    @apply col-span-2 bg-amber-500;
+  }
+  #calcNum [value="C"],
+  [value="+-"],
+  [value="%"],
+  [value="/"],
+  [value="X"],
+  [value="-"],
+  [value="+"],
+  [value="="] {
+    @apply bg-amber-500 text-white;
+  }
+}

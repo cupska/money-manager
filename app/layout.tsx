@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className=" relative">
-          <div className=" absolute w-full">
+          <div className=" w-full"> 
             <Header />
           </div>
         </div>

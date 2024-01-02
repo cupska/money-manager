@@ -7,8 +7,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = "postgres://default:4TczpBdx1qkW@ep-winter-bread-94566729-pooler.ap-southeast-1.postgres.vercel-storage.com:5432/verceldb" // uses connection pooling
-  directUrl = "postgres://default:4TczpBdx1qkW@ep-winter-bread-94566729.ap-southeast-1.postgres.vercel-storage.com:5432/verceldb" // uses a direct connection
+  url =  "postgresql://postgres:pondoktimurindah2@localhost:5432/money-manager"
+ // directUrl = "postgres://default:4TczpBdx1qkW@ep-winter-bread-94566729.ap-southeast-1.postgres.vercel-storage.com:5432/verceldb" // uses a direct connection
 }
 
 model User {
